@@ -89,3 +89,33 @@ document.addEventListener('keydown', (e) => {
         renderShape()
     }
 })
+
+document.addEventListener('keydown', (event) => {
+    if (event.code === 'Space') {
+        rotatePiece();
+    }
+});
+
+function rotatePiece() {
+    piece.shape = rotateMatrix(piece.shape);
+}
+
+function rotateMatrix(matrix) {
+
+    const newMatrix = matrix[0].map((_, i) => matrix.map(row => row[i]).reverse());
+    return newMatrix;
+}
+
+function rotatedMatrix(matrix) {
+    
+    const size = matrix.length;
+    const newMatrix = Array.from({ length: size }, () => Array(size).fill(0));
+    
+    for (let y = 0; y < size; y++) {
+        for (let x = 0; x < size; x++) {
+            newMatrix[x][size - 1 - y] = matrix[y][x];
+        }
+    }
+
+    return newMatrix;
+}
